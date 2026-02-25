@@ -1,7 +1,7 @@
 function App() {
     return (
         <>
-            <h1>Slider Puzzle</h1>
+            <h1 className="text-red-700">Slider Puzzle</h1>
         </>
     );
 }

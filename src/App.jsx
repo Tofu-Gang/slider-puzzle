@@ -11,6 +11,8 @@ function App() {
     })));
     const [isFinished, setIsFinished] = useState(false);
 
+    const goalTileIndex = StartConfig.map((tile) => tile.type).indexOf(Tiles.Goal);
+
     function updatePosition(index, newX, newY) {
         setPositions((current) => current.map((tile, i) => (
             index === i ? {
@@ -20,7 +22,6 @@ function App() {
                 bottom: newY + StartConfig[i].type.Dimensions.height
             } : tile
         )));
-        const goalTileIndex = StartConfig.map((tile) => tile.type).indexOf(Tiles.Goal);
         setIsFinished(index === goalTileIndex && newX === PuzzleBox.Dimensions.width / 4 && newY === PuzzleBox.Dimensions.height - Tiles.Goal.Dimensions.height);
     }
 
@@ -89,6 +90,7 @@ function App() {
                         index={index}
                         defaultPosition={tile.position}
                         bounds={getBounds(index)}
+                        isGoal={index === goalTileIndex}
                         disabled={isFinished}
                         width={tile.type.Dimensions.width}
                         height={tile.type.Dimensions.height}

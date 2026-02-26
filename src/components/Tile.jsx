@@ -1,8 +1,8 @@
 import Draggable from "react-draggable";
 import { useRef } from "react";
-import {PuzzleBox} from "../lib/config.js";
+import { PuzzleBox } from "../lib/config.js";
 
-function Tile({ index, defaultPosition, bounds, disabled, width, height, bgColor, borderColor, updatePosition }) {
+function Tile({ index, defaultPosition, bounds, isGoal, disabled, width, height, bgColor, borderColor, updatePosition }) {
     const ref = useRef(null);
 
     function onDrag(event, data) {
@@ -21,7 +21,13 @@ function Tile({ index, defaultPosition, bounds, disabled, width, height, bgColor
             <div
                 ref={ref}
                 className={`${bgColor} absolute rounded-xl border ${borderColor} ${disabled ? "" : "cursor-pointer"}`}
-                style={{ width, height }}
+                style={{
+                    width,
+                    height,
+                    marginTop: isGoal && disabled && "300px",
+                    opacity: isGoal && disabled ? "0" : "1",
+                    transition: isGoal && disabled ? "all 1s ease-out": "all 0.2s ease-out"
+                }}
             />
         </Draggable>
     );

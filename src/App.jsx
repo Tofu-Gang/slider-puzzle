@@ -106,19 +106,24 @@ function App() {
                         top: `${PuzzleBox.Dimensions.height}px`
                     }}/>
             </div>
-            {isFinished &&
-                <div
-                    className={`relative mx-auto ${PuzzleBox.Colors.bg} ${PuzzleBox.Colors.border} flex justify-center items-center`}
-                    style={{
-                        width: `${PuzzleBox.Dimensions.width * 2}px`,
-                        height: `${PuzzleBox.Dimensions.height * 3 / 5}px`,
-                        borderWidth: `${PuzzleBox.Dimensions.borderWidth}px`,
-                        bottom: `${4 * PuzzleBox.Dimensions.height / 5}px`
-                    }}
-                >
-                    FINISHED!!!
-                </div>
-            }
+            <div
+                className={`
+                ${isFinished ? "relative" : "invisible"} mx-auto ${PuzzleBox.Colors.bg} ${PuzzleBox.Colors.border} 
+                flex justify-center items-center 
+                duration-200 ease-out transition`}
+                style={{
+                    width: `${PuzzleBox.Dimensions.width * 2}px`,
+                    height: `${PuzzleBox.Dimensions.height * 3 / 5}px`,
+                    borderWidth: `${PuzzleBox.Dimensions.borderWidth}px`,
+                    bottom: `${4 * PuzzleBox.Dimensions.height / 5}px`,
+                    fontFamily: "Pixelify Sans, sans-serif",
+                    fontSize: "80px",
+                    opacity: isFinished? "1": "0",
+                    transition: "opacity 1s linear"
+                }}
+            >
+                FINISHED!!!
+            </div>
         </>
     );
 }

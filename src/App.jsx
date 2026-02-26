@@ -21,66 +21,53 @@ function App() {
         )));
     }
 
-    function getLeftBound(index) {
-        const currentTop = positions[index].top;
-        const currentBottom = positions[index].bottom;
-        const currentLeft = positions[index].left;
-        const relevant = positions.filter((tile, i) =>
-            i !== index &&
-            tile.right <= currentLeft &&
-            ((currentTop > tile.top && currentTop < tile.bottom) ||
-                (currentBottom > tile.top && currentBottom < tile.bottom) ||
-                (tile.top > currentTop && tile.top < currentBottom) ||
-                (tile.bottom > currentTop && tile.bottom < currentBottom) ||
-                currentTop === tile.top && currentBottom === tile.bottom));
-        return Math.max(0, ...relevant.map((tile) => tile.right));
-    }
+    function getBounds(index) {
+        const draggingLeft = positions[index].left;
+        const draggingRight = positions[index].right;
+        const draggingTop = positions[index].top;
+        const draggingBottom = positions[index].bottom;
+        const draggingWidth = StartConfig[index].type.Dimensions.width;
+        const draggingHeight = StartConfig[index].type.Dimensions.height;
 
-    function getTopBound(index) {
-        const currentLeft = positions[index].left;
-        const currentRight = positions[index].right;
-        const currentTop = positions[index].top;
-        const relevant = positions.filter((tile, i) =>
-            i !== index &&
-            tile.bottom <= currentTop &&
-            ((currentLeft > tile.left && currentLeft < tile.right) ||
-                (currentRight > tile.left && currentRight < tile.right) ||
-                (tile.left > currentLeft && tile.left < currentRight) ||
-                (tile.right > currentLeft && tile.right < currentRight) ||
-                currentRight === tile.right && currentLeft === tile.left));
-        return Math.max(0, ...relevant.map((tile) => tile.bottom));
-    }
-
-    function getRightBound(index) {
-        const currentTop = positions[index].top;
-        const currentBottom = positions[index].bottom;
-        const currentRight = positions[index].right;
-        const currentWidth = StartConfig[index].type.Dimensions.width;
-        const relevant = positions.filter((tile, i) =>
-            i !== index &&
-            tile.left >= currentRight &&
-            ((currentTop > tile.top && currentTop < tile.bottom) ||
-                (currentBottom > tile.top && currentBottom < tile.bottom) ||
-                (tile.top > currentTop && tile.top < currentBottom) ||
-                (tile.bottom > currentTop && tile.bottom < currentBottom) ||
-                currentTop === tile.top && currentBottom === tile.bottom));
-        return Math.min(PuzzleBox.Dimensions.width, ...relevant.map((tile) => tile.left)) - currentWidth;
-    }
-
-    function getBottomBound(index) {
-        const currentLeft = positions[index].left;
-        const currentRight = positions[index].right;
-        const currentBottom = positions[index].bottom;
-        const currentHeight = StartConfig[index].type.Dimensions.height;
-        const relevant = positions.filter((tile, i) =>
-            i !== index &&
-            tile.top >= currentBottom &&
-            ((currentLeft > tile.left && currentLeft < tile.right) ||
-                (currentRight > tile.left && currentRight < tile.right) ||
-                (tile.left > currentLeft && tile.left < currentRight) ||
-                (tile.right > currentLeft && tile.right < currentRight) ||
-                currentRight === tile.right && currentLeft === tile.left));
-        return Math.min(PuzzleBox.Dimensions.height, ...relevant.map((tile) => tile.top)) - currentHeight;
+        const others = positions.filter((_, i) => i !== index);
+        const horizontal = others.filter((tile) => (
+            draggingTop > tile.top && draggingTop < tile.bottom) ||
+            (draggingBottom > tile.top && draggingBottom < tile.bottom) ||
+            (tile.top > draggingTop && tile.top < draggingBottom) ||
+            (tile.bottom > draggingTop && tile.bottom < draggingBottom) ||
+            draggingTop === tile.top && draggingBottom === tile.bottom);
+        const vertical = others.filter((tile) => (
+            draggingLeft > tile.left && draggingLeft < tile.right) ||
+            (draggingRight > tile.left && draggingRight < tile.right) ||
+            (tile.left > draggingLeft && tile.left < draggingRight) ||
+            (tile.right > draggingLeft && tile.right < draggingRight) ||
+            draggingRight === tile.right && draggingLeft === tile.left);
+        return {
+            left: Math.max(
+                0,
+                ...horizontal
+                    .filter((tile) => tile.right <= draggingLeft)
+                    .map((tile) => tile.right)
+            ),
+            top: Math.max(
+                0,
+                ...vertical
+                    .filter((tile) => tile.bottom <= draggingTop)
+                    .map((tile) => tile.bottom)
+            ),
+            right: Math.min(
+                PuzzleBox.Dimensions.width,
+                ...horizontal
+                    .filter((tile) => tile.left >= draggingRight)
+                    .map((tile) => tile.left)
+            ) - draggingWidth,
+            bottom: Math.min(
+                PuzzleBox.Dimensions.height,
+                ...vertical
+                    .filter((tile) => tile.top >= draggingBottom)
+                    .map((tile) => tile.top)
+            ) - draggingHeight
+        }
     }
 
     return (
@@ -96,11 +83,7 @@ function App() {
                     key={index}
                     index={index}
                     defaultPosition={tile.position}
-                    bounds={{
-                        left: getLeftBound(index),
-                        top: getTopBound(index),
-                        right: getRightBound(index),
-                        bottom: getBottomBound(index)}}
+                    bounds={getBounds(index)}
                     width={tile.type.Dimensions.width}
                     height={tile.type.Dimensions.height}
                     bgColor={tile.type.Colors.bg}

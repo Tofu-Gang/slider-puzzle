@@ -10,7 +10,7 @@ export const PuzzleBox = {
     }
 }
 
-const Tiles = {
+export const Tiles = {
     Vertical: {
         Colors: {
             bg: "bg-yellow-800",

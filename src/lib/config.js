@@ -13,7 +13,8 @@ export const PuzzleBox = {
 const Tiles = {
     Vertical: {
         Colors: {
-            bg: "bg-yellow-800"
+            bg: "bg-yellow-800",
+            border: "border-amber-400"
         },
         Dimensions: {
             width: PuzzleBox.Dimensions.width / 4,
@@ -22,7 +23,8 @@ const Tiles = {
     },
     Horizontal: {
         Colors: {
-            bg: "bg-yellow-800"
+            bg: "bg-yellow-800",
+            border: "border-amber-400"
         },
         Dimensions: {
             width: PuzzleBox.Dimensions.width / 2,
@@ -31,7 +33,8 @@ const Tiles = {
     },
     Square: {
         Colors: {
-            bg: "bg-gray-500"
+            bg: "bg-gray-500",
+            border: "border-amber-400"
         },
         Dimensions: {
             width: PuzzleBox.Dimensions.width / 4,
@@ -40,7 +43,8 @@ const Tiles = {
     },
     Goal: {
         Colors: {
-            bg: "bg-black"
+            bg: "bg-black",
+            border: "border-amber-400"
         },
         Dimensions: {
             width: PuzzleBox.Dimensions.width / 2,

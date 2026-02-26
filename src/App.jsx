@@ -124,7 +124,7 @@ function App() {
                     transition: "opacity 1s linear"
                 }}
             >
-                FINISHED!!!
+                Hotovo!!!
             </div>
         </>
     );

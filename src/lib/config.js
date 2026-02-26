@@ -5,8 +5,8 @@ export const PuzzleBox = {
     },
     Dimensions: {
         borderWidth: 10,
-        width: 400,
-        height: 500
+        width: 320,
+        height: 400
     }
 }
 

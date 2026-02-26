@@ -1,5 +1,6 @@
 import Draggable from "react-draggable";
 import { useRef } from "react";
+import {PuzzleBox} from "../lib/config.js";
 
 function Tile({ index, defaultPosition, bounds, width, height, bgColor, borderColor, updatePosition }) {
     const ref = useRef(null);
@@ -14,6 +15,7 @@ function Tile({ index, defaultPosition, bounds, width, height, bgColor, borderCo
             defaultPosition={defaultPosition}
             bounds={bounds}
             onDrag={onDrag}
+            grid={[PuzzleBox.Dimensions.width / 4, PuzzleBox.Dimensions.height / 5]}
         >
             <div
                 ref={ref}

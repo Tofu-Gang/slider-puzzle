@@ -1,4 +1,4 @@
-export const PuzzleBox = {
+export const PuzzleBoxConfig = {
     Colors: {
         bg: "bg-amber-400",
         border: "border-yellow-950",
@@ -17,8 +17,8 @@ export const Tiles = {
             border: "border-amber-400"
         },
         Dimensions: {
-            width: PuzzleBox.Dimensions.width / 4,
-            height: PuzzleBox.Dimensions.height / 2.5
+            width: PuzzleBoxConfig.Dimensions.width / 4,
+            height: PuzzleBoxConfig.Dimensions.height / 2.5
         }
     },
     Horizontal: {
@@ -27,8 +27,8 @@ export const Tiles = {
             border: "border-amber-400"
         },
         Dimensions: {
-            width: PuzzleBox.Dimensions.width / 2,
-            height: PuzzleBox.Dimensions.height / 5
+            width: PuzzleBoxConfig.Dimensions.width / 2,
+            height: PuzzleBoxConfig.Dimensions.height / 5
         }
     },
     Square: {
@@ -37,8 +37,8 @@ export const Tiles = {
             border: "border-amber-400"
         },
         Dimensions: {
-            width: PuzzleBox.Dimensions.width / 4,
-            height: PuzzleBox.Dimensions.height / 5
+            width: PuzzleBoxConfig.Dimensions.width / 4,
+            height: PuzzleBoxConfig.Dimensions.height / 5
         }
     },
     Goal: {
@@ -47,8 +47,8 @@ export const Tiles = {
             border: "border-amber-400"
         },
         Dimensions: {
-            width: PuzzleBox.Dimensions.width / 2,
-            height: PuzzleBox.Dimensions.height / 2.5
+            width: PuzzleBoxConfig.Dimensions.width / 2,
+            height: PuzzleBoxConfig.Dimensions.height / 2.5
         }
     }
 }
@@ -60,7 +60,7 @@ export const StartConfig = [
     },
     {
         type: Tiles.Vertical,
-        position: { x: PuzzleBox.Dimensions.width - Tiles.Vertical.Dimensions.width, y: 0 }
+        position: { x: PuzzleBoxConfig.Dimensions.width - Tiles.Vertical.Dimensions.width, y: 0 }
     },
     {
         type: Tiles.Vertical,
@@ -68,7 +68,7 @@ export const StartConfig = [
     },
     {
         type: Tiles.Vertical,
-        position: { x: PuzzleBox.Dimensions.width - Tiles.Vertical.Dimensions.width, y: Tiles.Vertical.Dimensions.height }
+        position: { x: PuzzleBoxConfig.Dimensions.width - Tiles.Vertical.Dimensions.width, y: Tiles.Vertical.Dimensions.height }
     },
     {
         type: Tiles.Horizontal,
@@ -84,7 +84,7 @@ export const StartConfig = [
     },
     {
         type: Tiles.Square,
-        position: { x: PuzzleBox.Dimensions.width - Tiles.Square.Dimensions.width, y: Tiles.Vertical.Dimensions.height * 2 }
+        position: { x: PuzzleBoxConfig.Dimensions.width - Tiles.Square.Dimensions.width, y: Tiles.Vertical.Dimensions.height * 2 }
     },
     {
         type: Tiles.Square,
@@ -92,6 +92,6 @@ export const StartConfig = [
     },
     {
         type: Tiles.Square,
-        position: { x: PuzzleBox.Dimensions.width - Tiles.Vertical.Dimensions.width - Tiles.Square.Dimensions.width, y: Tiles.Goal.Dimensions.height + Tiles.Horizontal.Dimensions.height }
+        position: { x: PuzzleBoxConfig.Dimensions.width - Tiles.Vertical.Dimensions.width - Tiles.Square.Dimensions.width, y: Tiles.Goal.Dimensions.height + Tiles.Horizontal.Dimensions.height }
     }
 ];
